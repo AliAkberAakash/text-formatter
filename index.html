@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        text-align: center;
+      }
+      button {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body style="margin: auto; width: 50%; padding: 10px">
+    <h1>Text Formatter</h1>
+    <h3>Enter Unformatted Text Bellow:</h3>
+    <form>
+      <div>
+        <textarea
+          id="string"
+          name="string"
+          type="text"
+          cols="50"
+          rows="10"
+        ></textarea>
+      </div>
+      <div>
+        <label>Number of Unnecessary words:</label>
+        <input
+          id="limit"
+          name="limit"
+          type="number"
+          value="3"
+          min="1"
+          max="100"
+        />
+      </div>
+    </form>
+    <div>
+      <button onclick="formatter()">Fromat it!</button>
+    </div>
+    <div>
+      <textarea
+        id="output"
+        name="string"
+        type="text"
+        cols="50"
+        rows="10"
+      ></textarea>
+    </div>
+    <div>
+      <button onclick="copier()">Copy text</button>
+    </div>
+    <p id="copynotify"></p>
+
+    <script>
+      function formatter() {
+        let text = document.getElementById("string").value;
+        let limit = parseInt(document.getElementById("limit").value);
+        let temp = text.split(" ");
+        let newArr = [];
+        for (let i = 0; i < temp.length; i += limit + 1) {
+          newArr.push(temp[i]);
+        }
+        text = newArr.join("");
+        document.getElementById("output").innerHTML = text;
+      }
+      function copier() {
+        let copyText = document.getElementById("output");
+        copyText.select();
+        navigator.clipboard.writeText(copyText.value);
+        document.getElementById("copynotify").innerHTML =
+          "Successfully copied to clipboard!";
+      }
+    </script>
+  </body>
+</html>
